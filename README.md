@@ -16,7 +16,7 @@ The project has 3 primary functions:
 * Configure the switch(es) with a base config using Zero Touch Provisioning (ZTP)
 
 The ZTP script will look in "/config" for a set variables to use. It uses the switch eth0 mac address to identify the correct file to use (for example "/config/74e6e2f5a280" would be used for switch with mac "74:e6:e2:f5:a2:80". If one is not present, a file is created using the default template "/config/default".
-A set of global variables are also defined in "/global.settings". Aceept for the license, this parameters do not generally need to be modified.
+A set of global variables are also defined in "/global_settings.yml". Aceept for the license, this parameters do not generally need to be modified.
 The variables are combined with templates defined in "/config/templates/" to generate the switch configuration, which are stored in "/config/result/". The resulting config files are moved to the appropriate folders on the switch filesystem. 
 After the config files are copied, the config is applied by restarting the appropriate daemons.
 
