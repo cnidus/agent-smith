@@ -1,6 +1,10 @@
 # agent-smith
 This is a simple project to help streamline the installation and basic config of Cumulus Linux to support a Nutanix cluster.
 
+The project is named after the "agent smith" character from The Matrix films. In the films, Agent Smith becomes a type of virus, replicating and copying himself over the top of other people. This project performs a similar act :)
+
+![Diagram](smith.jpg)
+
 # Why do we need this?
 Open Networking switches come from the factory installed with only a bootloader, similar to pxe. This enables the switch to be network booted and the customer chooses a Network Operating System seperately, similar to the way servers are traditionally purchased and installed in large envrionments.
 
