@@ -1,0 +1,42 @@
+#!/bin/bash
+function error() {
+  echo -e "\e[0;33mERROR: The Zero Touch Provisioning script failed while running the command $BASH_COMMAND at line $BASH_LINENO.\e[0m" >&2
+  exit 1
+}
+ 
+# Log all output from this script
+exec >/var/log/autoprovision 2>&1
+ 
+trap error ERR
+
+# Read & format eth0 MAC address into a Switch ID "SWID"
+MAC = ifconfig eth0 | awk '/^[a-z]/ { iface=$1; mac=$NF; next } /inet addr:/ { print mac }' | sed -e 's/\://g'
+SWID = ${MAC} | sed -e 's/\://g'
+
+# Define files
+GS_FILE = ${ZTP_USB_MOUNTPOINT}/global_settings.yml
+VAR_FILE = ${ZTP_USB_MOUNTPOINT}/config/${SWID}
+INT_TEMPLATE = ${ZTP_USB_MOUNTPOINT}/config/templates/interfaces.j2
+
+
+#Look for a variable file, otherwise create one from the template
+if 
+ 
+#Load interface config from usb
+cp ${ZTP_USB_MOUNTPOINT}/interfaces /etc/network/interfaces
+ 
+#Load port config from usb
+#   (if breakout cables are used for certain interfaces)
+cp ${ZTP_USB_MOUNTPOINT}/ports.conf /etc/cumulus/ports.conf
+ 
+#Install a License from usb and restart switchd
+cl-license -i ${ZTP_USB_MOUNTPOINT}/license.txt && systemctl restart switchd.service
+ 
+#Reload interfaces to apply loaded config
+ifreload -a
+ 
+#Output state of interfaces
+netshow interface
+ 
+# CUMULUS-AUTOPROVISIONING
+exit 0
