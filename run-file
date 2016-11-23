@@ -1,0 +1,19 @@
+### Run log ###
+# This file contains the derived settings grabbed from global-settings
+# for each MLAG pair.
+
+# Example derived pair.
+pair1:
+  sysmac: "44:39:39:FF:40:92"
+  nodes:
+    080027f5743b:
+      ip: "169.254.255.1"
+      peer_ip: "169.254.255.2"
+      backup-ip: ""
+    080027f5743c:
+      ip: "169.254.255.2"
+      peer_ip: "169.254.255.1"
+      backup-ip: ""
+
+
+#

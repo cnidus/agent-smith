@@ -1,0 +1,27 @@
+### Global settings ###
+# This file contains a global list of settings. Generally the only thing you
+# need to modify is the license_key.
+
+### Available MLAG group settings ###
+# These addresses are use in each MLAG pair. The first switch in a pair will
+# grab an available address and fill out the run-file.
+MLAG_pairs:
+  pair1:
+    sysmac: "44:39:39:FF:40:92"
+    peerlink_ip: ("169.254.255.1", "169.254.255.2")
+  pair2:
+    sysmac: "44:39:39:FF:40:93"
+    peerlink_ip: ("169.254.255.1", "169.254.255.2")
+  pair3:
+    sysmac: "44:39:39:FF:40:94"
+    peerlink_ip: ("169.254.255.1", "169.254.255.2")
+  pair4:
+    sysmac: "44:39:39:FF:40:95"
+    peerlink_ip: ("169.254.255.1", "169.254.255.2")
+
+### Cumulus Linux License ###
+# Fill this in with license string obtained via the license portal or signup email.
+# It should be in the form of email@address.tld|Base64LicenseString
+license_key: "email@address.tld|Base64LicenseString"
+
+### VLANs ###

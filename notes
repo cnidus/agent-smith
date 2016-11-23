@@ -1,0 +1,17 @@
+dependencies:
+
+Jinja2
+  dpkg -i python-jinja2_2.7.3-1_all.deb
+  pip install jinja2-cli
+    dpkg -i python-jinja2-cli ???
+
+yaml
+  pip install pyyml
+    dpkg -i python-pyyml
+
+ansible
+  libffi?
+
+
+Questions:
+1) Can we use ipv6 

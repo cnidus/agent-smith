@@ -9,19 +9,38 @@ exec >/var/log/autoprovision 2>&1
 trap error ERR
 
 # Read & format eth0 MAC address into a Switch ID "SWID"
-MAC = ifconfig eth0 | awk '/^[a-z]/ { iface=$1; mac=$NF; next } /inet addr:/ { print mac }' | sed -e 's/\://g'
+MAC = ifconfig eth0 | awk '/^[a-z]/ { iface=$1; mac=$NF; next } /inet addr:/ { print mac }'
 SWID = ${MAC} | sed -e 's/\://g'
 
-# Define files
+# Define file locations as variables
 GS_FILE = ${ZTP_USB_MOUNTPOINT}/global_settings.yml
 VAR_FILE = ${ZTP_USB_MOUNTPOINT}/config/${SWID}
 INT_TEMPLATE = ${ZTP_USB_MOUNTPOINT}/config/templates/interfaces.j2
+RUN_FILE = ${ZTP_USB_MOUNTPOINT}/run-file
 
-#Install Jinja2 template language
+#Install pre-req's
 dpkg -i ${ZTP_USB_MOUNTPOINT}/files/python-jinja2_2.7.3-1_all.deb
+#dpkg -i ${ZTP_USB_MOUNTPOINT}/files/python-jinja2-cli.deb
 
-#Look for a variable file, otherwise create one from the template
-if
+### Look for a previous run file. ###
+# This file will be created and populated from global_settings file.
+# Configuration needs to be shared between MLAG pairs and globally unique.
+# Previous run file allows for this information to be shared.
+if ${RUN_FILE} then {
+
+} else
+{
+
+}
+
+
+#Look for per-switch variables, otherwise create one from the template
+if ${VAR_FILE} then {
+  # Expan
+} else
+{
+  cp ${ZTP_USB_MOUNTPOINT}/config/default ${VAR_FILE}
+}
 
 #Load interface config from usb
 cp ${ZTP_USB_MOUNTPOINT}/interfaces /etc/network/interfaces
