@@ -25,3 +25,22 @@ MLAG_pairs:
 license_key: "email@address.tld|Base64LicenseString"
 
 ### VLANs ###
+# These are the L2 VLAN IDs that will be provisioned initially. Additional
+# VLANs can be configured after install, or by modifying this list. All VLANs
+# will be
+VLANs: "1-100"
+
+### Layer3 interfaces ####
+# L3 aka "SVI" interfaces for the VLANs.
+# This needs some work. Might be better for this to move elsewhere... 
+SVI:
+  VLAN10:
+    ipv4: "192.168.10.3/24"
+    alias: "VM 10 Network"
+    vrr_ipv4: "192.168.10.1/24"
+    vrr_mac: "44:39:39:FF:00:10"
+  VLAN20:
+    ipv4: "192.168.20.3/24"
+    alias: "VM 20 Network"
+    vrr_ipv4: "192.168.20.1/24"
+    vrr_mac: "44:39:39:FF:00:20"
